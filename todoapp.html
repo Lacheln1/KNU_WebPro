@@ -8,21 +8,43 @@
     
     <style>
         .title{
-            border-bottom: 1px solid #444141cf;
-            font-size: 35px;
-            padding-bottom: 10px;
-            
+         
+            font-size: 35px;       
+        }
+
+        .title::after{
+            content: '';
+            display: block;
+           width: auto;
+           border-bottom: 1px solid #444141cf;
+           padding-top: 10px;
+        }
+
+        .body-container{
            
+            background-color: rgb(255, 193, 7);   
+            width: 400px; 
+            height: auto;
+            /* padding-top: 50px;
+            padding-left: 50px; */
+            padding: 2rem !important;
+            margin-top: 7%;
+            margin-left: 7%;
         }
-        body{
-            background-color: rgb(255, 193, 7);      
-        }
+        
+
+
         .input-group{
             display: flex;
             margin-top: 10px;
             padding-bottom: 10px;
-            border-bottom: 1px solid;  
+            border-bottom: 1px solid #444141cf;    
         }
+
+         .input-borderline::after{        
+           height: 50px;
+           
+        } 
 
         .form-control{
             display: inline;
@@ -31,23 +53,31 @@
             height: 40px;
             border-radius: 3px 0px 0px 3px;
             font-size: 15px;
-            border: none;     
+            border: none;    
         }
 
+      
+
         .btn{
-            display: inline;
+            /* display: inline; */
             box-sizing: border-box;
-            
-            
             height: 40px;
             border-radius: 0px 3px 3px 0px;
             background-color: rgb(13, 110, 254);
             color: white;
             border: none;
             font-size: 1em;
+            cursor: pointer;
+            
              
         }
 
+        
+        .btn:hover{
+            background-color: rgb(11, 94, 215);
+        }
+
+        /* 추가 된 메모들 */
         li{
             margin-left: -40px;
             display: flex;
@@ -60,9 +90,11 @@
             background-color: rgb(255, 243, 205);
             color: rgb(102, 77, 3);
             font: bold;
-            font-size: 15px;
+            font-size: 15px;  
            
-            
+        }
+        li:hover{
+            background-color: rgb(230, 219, 185);
         }
         /* 공백 넣기 */
         li::before{
@@ -70,63 +102,76 @@
         }
 
         .btn-close{
+            position: relative;
             display: inline;
             border: none;
-            width:  40px;
-            height: 40px;
-            margin-left: auto;
-            background: none;
+            width:  20px;
+            height: 20px;
+            left: -15px;
+           background: none;
+            
+        }
+        .ms-auto{
+            margin-left: auto !important;
+        }
+
+        .btn-close:before, .btn-close:after{
+            position: absolute;
+            content: '';
+            top: 1px;
+            height: 21px;
+            width: 1.5px;
+            background-color: #444141cf;
+            border-radius: 50%;
             
         }
 
-        /* .btn-close:before, .btn-close:after{
-            position: absolute;
-            display: flex;
-            margin-left: 13px;
-            margin-top: 142px;
-            content: '';
-            height: 25px;
-            width: 2px;
-            background-color: #444141cf;
-            border-radius: 1px;
-            
-        } */
+        .btn-close:hover{
+            cursor: pointer;
+        }
 
-        /* .btn-close::before{
+        .btn-close::before{
             transform: rotate(45deg);
-            top: 15px;
-            
-        } */
+           border-radius: 50%;
+        }
+
+        .btn-close:hover::before{
+            background-color: rgb(58, 55, 46);
+            cursor: pointer;
+        }
+
 
         .btn-close::after{
-            display: inline-block;
-            content: "\00d7";
-            font-size: 30px;
-            color: #444141cf;
-            border-radius: 2px;
+            transform: rotate(-45deg);
             
         }
-   
-
+        .btn-close:hover::after{
+            background-color: rgb(58, 55, 46);
+            cursor: pointer;
+            
+        }
     </style>
 </head>
 
-<!-- 헤더 -->
-<header>
-    <div class="title">
-         My ToDo App
-        
-    </div> 
-</header>
-<body>
-    
-        <div class="input-group">
-            <input type="text" class="form-control" id="item" placeholder="  할일을 입력하세요">
-             <button type="button"class="btn"  onclick="addItem()">할일 추가</button> 
-        </div>
-          
 
-        <ul id="todolist" class="list-group"></ul>
+<body>
+    <div class="body-container">
+        
+        <div class="title">
+            My ToDo App
+        </div>
+
+         <div class="input-borderline">
+            <div class="input-group">
+                <input type="text" class="form-control" id="item" placeholder="  할일을 입력하세요">
+                <button type="button"class="btn"  onclick="addItem()">할일 추가</button>
+                </div>
+        </div>
+            
+            <ul id="todolist" class="list-group"></ul>
+        
+
+    </div>
     
 
     <script>
@@ -135,7 +180,7 @@
             let list = document.getElementById("todolist");
             let listitem = document.createElement("li");          
             let xbtn = document.createElement("button");
-            xbtn.className="btn-close";
+            xbtn.className="btn-close ms-auto";
             xbtn.onclick=(function(e){
                 let pnode = e.target.parentNode;
                 list.removeChild(pnode);

@@ -1,0 +1,8 @@
+CREATE TABLE student(
+id INT NOT NULL Primary Key AUTO_INCREMENT,
+username VARCHAR(20),
+univ VARCHAR(40),
+birth timestamp not null default current_timestamp,
+email VARCHAR(40),
+password VARCHAR(20) NOT NULL
+)
